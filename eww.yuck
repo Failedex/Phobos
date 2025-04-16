@@ -1,0 +1,28 @@
+(defvar version "0.1.8")
+
+(deflisten windowsjson 
+  :initial '[{"focused": true, "empty": false, "name": 1}, {"focused": false, "empty": true, "name": 2}, {"focused": false, "empty": true, "name": 3}, {"focused": false, "empty": true, "name": 4}, {"focused": false, "empty": true, "name": 5}]'
+  "./scripts/tasklist.py")
+
+(deflisten workspacejson 
+  :initial '{"workspaces": [{"focused": true, "empty": false, "name": 1}, {"focused": false, "empty": true, "name": 2}, {"focused": false, "empty": true, "name": 3}, {"focused": false, "empty": true, "name": 4}, {"focused": false, "empty": true, "name": 5}], "focused": 0}'
+  "./scripts/workspace.py")
+
+(defvar tasklistjson "[]")
+
+(deflisten appsjson :initial '{"apps": []}' "./scripts/apps.py")
+
+(deflisten notifications :initial '{
+                                    "count": 0,
+                                    "dnd": false,
+                                    "notifications": [],
+                                    "popups": []}
+    '
+    "./scripts/notifCatch")
+
+(include "./yuck/topbar.yuck")
+(include "./yuck/bottombar.yuck")
+(include "./yuck/tasklist.yuck")
+(include "./yuck/launcher.yuck")
+(include "./yuck/notifications.yuck")
+(include "./yuck/util.yuck")

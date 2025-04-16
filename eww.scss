@@ -1,0 +1,121 @@
+
+$bg: #999999;
+$bg2: #717171;
+$fg: #545454;
+$fg2: #070707;
+$red: #9c3d3d;
+
+$padding: 8px; 
+$margin: 8px; 
+
+
+* {
+  all: unset; 
+  color: $fg;
+  font-family: "Fairfax HD";
+  font-size: 30px;
+  font-weight: bold;
+}
+
+tooltip {
+  background: linear-gradient(135deg, transparent 10%, $bg 10%, $bg 90%,transparent 90%); 
+}
+
+.window {
+  background-color: $bg;
+  &.cont {
+    padding: $padding;
+  }
+  &.bar {
+    padding: 0px 2 * $padding;
+  }
+  &.sub {
+    background-color: $bg2;
+  }
+}
+
+label {
+  margin: 0 $margin;
+  &.large {
+    font-size: 35px;
+  }
+  &.hard {
+    color: $fg2;
+  }
+}
+
+.triangle {
+   border-style: solid;
+   border-color: transparent;
+   &.topleft {
+     border-width: 20px 20px 0 0;
+     border-color: $bg transparent transparent transparent;
+     &.large {
+       border-width: 40px 40px 0 0;
+     }
+   }
+   &.topright {
+     border-width: 0 20px 20px 0;
+     border-color: transparent $bg transparent transparent;
+     &.large {
+       border-width: 0 40px 40px 0;
+     }
+   }
+   &.bottomright {
+     border-width: 0 0 20px 20px;
+     border-color: transparent transparent $bg transparent;
+     &.large {
+       border-width: 0 0 40px 40px;
+     }
+   }
+   &.bottomleft {
+     border-width: 20px 0 0 20px;
+     border-color: transparent transparent transparent $bg;
+     &.large {
+       border-width: 40px 0 0 40px;
+     }
+   }
+}
+
+.trianglesub {
+   border-style: solid;
+   border-color: transparent;
+   &.topleft {
+     border-width: 20px 20px 0 0;
+     border-color: $bg2 transparent transparent transparent;
+     &.large {
+       border-width: 40px 40px 0 0;
+     }
+   }
+   &.topright {
+     border-width: 0 20px 20px 0;
+     border-color: transparent $bg2 transparent transparent;
+     &.large {
+       border-width: 0 40px 40px 0;
+     }
+   }
+   &.bottomright {
+     border-width: 0 0 20px 20px;
+     border-color: transparent transparent $bg2 transparent;
+     &.large {
+       border-width: 0 0 40px 40px;
+     }
+   }
+   &.bottomleft {
+     border-width: 20px 0 0 20px;
+     border-color: transparent transparent transparent $bg2;
+     &.large {
+       border-width: 40px 0 0 40px;
+     }
+   }
+}
+
+entry {
+  color: $fg;
+  background-color: $bg;
+  padding: 0px $padding;
+}
+
+@import "./scss/topbar.scss";
+@import "./scss/notifications.scss";
+@import "./scss/tasklist.scss";

@@ -1,0 +1,54 @@
+
+(defwidget floatwin [?title] 
+  (box 
+    :orientation "v"
+    :space-evenly false 
+    (box 
+      :orientation "h"
+      :space-evenly false 
+      (box 
+        :class "triangle bottomright large")
+      (box 
+        :class "window"
+        :hexpand true
+        (label 
+          :class "large"
+          :halign "start"
+          :valign "end"
+          :text title))) 
+         
+    (children)
+        
+    (box 
+      :orientation "h"
+      :space-evenly false 
+      (box 
+        :class "window"
+        :hexpand true)
+      (box 
+        :class "triangle topleft large"))))
+
+(defwidget subbox [?class]
+  (box 
+    :style "margin: 8px;"
+    :orientation "v"
+    :space-evenly false 
+    (box 
+      :orientation "h"
+      :space-evenly false 
+      (box 
+        :class "triangle${class} bottomright")
+      (box 
+        :class "window ${class}"
+        :hexpand true))
+         
+    (children)
+        
+    (box 
+      :orientation "h"
+      :space-evenly false 
+      (box 
+        :class "window ${class}"
+        :hexpand true)
+      (box 
+        :class "triangle${class} topleft"))))

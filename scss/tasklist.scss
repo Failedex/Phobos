@@ -1,0 +1,38 @@
+
+
+.tlred {
+  margin: $margin;
+  border-style: solid;
+  border-color: transparent;
+  border-width: 20px 20px 0 0;
+  border-color: $red transparent transparent transparent;
+}
+.brred {
+  margin: $margin;
+  border-style: solid;
+  border-color: transparent;
+  border-width: 0 0 20px 20px;
+  border-color: transparent transparent $red transparent;
+}
+
+.trred {
+  transition: 500ms;
+  min-width: 30px;
+  min-height: 30px;
+  margin: $margin;
+  box-shadow: none;
+  &.active {
+    box-shadow: 5px -5px 0px 0px $red;
+  }
+}
+
+.blred {
+  transition: 500ms;
+  min-width: 30px;
+  min-height: 30px;
+  margin: $margin;
+  box-shadow: none;
+  &.active {
+    box-shadow: -5px 5px 0px 0px $red;
+  }
+}

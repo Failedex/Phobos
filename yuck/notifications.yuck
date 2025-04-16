@@ -1,0 +1,70 @@
+
+(defwindow notifypopup 
+  :geometry (geometry 
+              :x 0
+              :y 8 
+              :width 450 
+              :height 0 
+              :anchor "top center")
+  :stacking "overlay"
+  :monitor '["eDP-1", "<primary>", 0]'
+  (revealer 
+    :reveal {arraylength(notifications.popups) > 0}
+    :transition "slidedown"
+    (box 
+      :orientation "v"
+      :space-evenly false 
+      :spacing 16
+      (for n in {notifications.popups}
+        (singlenotif :noti n)))))
+
+(defwidget singlenotif [noti]
+  (button
+    :class "notif"
+    :onclick "./scripts/notifManage --close ${noti.id}"
+    :tooltip "${noti.time}"
+    (box 
+      :orientation "h"
+      :space-evenly false
+      (box 
+        :orientation "v"
+        :space-evenly false 
+        (box 
+          :class "triangle bottomright large")
+        (box 
+          :class "window"
+          :vexpand true))
+      (box 
+        :orientation "h"
+        :class "window cont"
+        :space-evenly false 
+        (box 
+          :valign "start"
+          :class "notiimage"
+          :visible {noti.image != "null"}
+          :width 80
+          :height 80
+          :style "background-image: url('${noti.image}');")
+        (box 
+          :vexpand true
+          :hexpand true
+          :orientation "v"
+          :space-evenly false
+          (label 
+            :wrap true
+            :markup "<b>${noti.summary}</b>")
+          (label 
+            :wrap true
+            :visible {noti.body != "null"}
+            :text {noti.body})))
+      (box 
+        :orientation "v"
+        :space-evenly false 
+        (box 
+          :class "window"
+          :vexpand true)
+        (box 
+          :class "triangle topleft large")))))
+      
+      
+             

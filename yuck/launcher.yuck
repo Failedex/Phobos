@@ -1,0 +1,53 @@
+
+(defwindow launcher 
+  :geometry (geometry 
+              :x 20 
+              :y 20 
+              :width 400 
+              :height 400
+              :anchor "bottom left")
+  :stacking "overlay"
+  :exclusive false 
+  :monitor '["eDP-1", "<primary>", 0]'
+  :focusable true
+  :wm-ignore false
+  (floatwin 
+    :title "Launcher" 
+    (box 
+      :orientation "v"
+      :vexpand true 
+      :space-evenly false
+      :class "window cont"
+      (subbox 
+        :class "sub"
+        (box 
+          :orientation "v"
+          :space-evenly false
+          :class "window sub cont"
+          (subbox
+            (input
+              :onchange "./scripts/apps.py --query '{}'"
+              :onaccept "(cd && ${appsjson.apps[0].desktop}) & ${EWW_CMD} close launcher"))
+          (scroll 
+            :hscroll false
+            :vscroll true
+            :height 400
+            (box 
+              :orientation "v"
+              :space-evenly false
+              (for app in {appsjson.apps}
+                (app :a app)))))))))
+          
+(defwidget app [a]
+  (button 
+    :onclick "(cd && ${a.desktop}) & ${EWW_CMD} close launcher"
+    (subbox 
+      (box 
+        :class "window cont"
+        :orientation "h" 
+        (label 
+          :xalign 0 
+          :truncate true
+          :style "font-size: 25px;"
+          :markup "${a.name}")))))
+        

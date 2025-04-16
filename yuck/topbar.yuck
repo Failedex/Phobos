@@ -1,0 +1,90 @@
+
+(defwindow topbar 
+  :geometry (geometry 
+              :x 0
+              :y 0
+              :width "100%"
+              :height 70
+              :anchor "top center")
+  :stacking "bottom"
+  :exclusive true 
+  :monitor '["eDP-1", "<primary>", 0]'
+  :wm-ignore false
+  (topbarstruct))
+
+(defwidget topbarstruct [] 
+  (box
+    :orientation "h"
+    :space-evenly false
+    (box 
+      :orientation "h"
+      :space-evenly false
+      :class "window bar"
+      :style "margin-bottom: 20px;"
+      :hexpand true
+      (label 
+        :text "PHOBOS v ${version}"))
+    (box
+      :orientation "v"
+      :space-evenly false
+      (box
+        :class "window"
+        :vexpand true)
+      (box 
+        :class "triangle topright"))
+    (box 
+      :orientation "h"
+      :space-evenly false 
+      :spacing 20
+      :class "window bar"
+      (image 
+        :tooltip "${EWW_BATTERY.BAT0.capacity}%"
+        :image-width 35
+        :path "./assets/icons/bat${ EWW_BATTERY.BAT0.status == 'Charging' ? 'c' : min(round(EWW_BATTERY.BAT0.capacity / 25, 0), 3)}.svg")
+      (label 
+        :class "large"
+        :text {formattime(EWW_TIME, '%-d/%-m/%Y')}) 
+      (box 
+        :orientation "h"
+        :space-evenly false
+        :valign "center"
+        :class "animtime"
+        (animdigit 
+          :class "hard large"
+          :cur {substring(formattime(EWW_TIME, '%H'), 0, 1)})
+        (animdigit 
+          :class "hard large"
+          :cur {substring(formattime(EWW_TIME, '%H'), 1, 1)})
+        (label 
+          :class "hard large"
+          :text ":")
+        (animdigit  
+          :class "hard large"
+          :cur {substring(formattime(EWW_TIME, '%M'), 0, 1)})
+        (animdigit
+          :class "hard large"
+          :cur {substring(formattime(EWW_TIME, '%M'), 1, 1)})
+        (label 
+          :class "hard large"
+          :text ":")
+        (animdigit  
+          :class "hard large"
+          :cur {substring(formattime(EWW_TIME, '%S'), 0, 1)})
+        (animdigit
+          :class "hard large"
+          :cur {substring(formattime(EWW_TIME, '%S'), 1, 1)})))))
+
+(defwidget animdigit [cur class]
+  (stack 
+    :selected cur
+    :transition "slidedown"
+    (label :class class :text 0)
+    (label :class class :text 1)
+    (label :class class :text 2)
+    (label :class class :text 3)
+    (label :class class :text 4)
+    (label :class class :text 5)
+    (label :class class :text 6)
+    (label :class class :text 7)
+    (label :class class :text 8)
+    (label :class class :text 9)))

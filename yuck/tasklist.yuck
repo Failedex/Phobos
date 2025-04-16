@@ -1,0 +1,181 @@
+
+(defwindow tasklist 
+  :geometry (geometry 
+              :x 20 
+              :y 20
+              :width 400 
+              :height 710
+              :anchor "bottom right")
+  :stacking "overlay"
+  :exclusive false 
+  :monitor '["eDP-1", "<primary>", 0]'
+  :wm-ignore false 
+  (box
+    :orientation "h"
+    :space-evenly false
+    :spacing 16
+    ; (floatwin 
+    ;   :title "tasklist"
+    ;   (box 
+    ;     :vexpand true 
+    ;     :class "window cont"
+    ;     :width 400
+    ;     (subbox 
+    ;       :class "sub"
+    ;       (box 
+    ;         :vexpand true 
+    ;         :class "window sub cont"
+    ;         (scroll 
+    ;           :vscroll true 
+    ;           :hscroll false 
+    ;           :vexpand true
+    ;           (box 
+    ;             :orientation "v"
+    ;             :space-evenly false 
+    ;             (for app in {tasklistjson}
+    ;               (task 
+    ;                 :a app))))))))
+    (floatwin
+      :title "Navigation"
+      (box 
+        :orientation "h"
+        :space-evenly false
+        :vexpand true
+        :class "window cont"
+        (subbox 
+          :class "sub"
+          (box 
+            :vexpand true 
+            :width 400
+            :class "window sub cont"
+            (scroll 
+              :vscroll true 
+              :hscroll false 
+              :vexpand true
+              (box 
+                :orientation "v"
+                :space-evenly false 
+                (for app in {tasklistjson}
+                  (task 
+                    :a app))))))
+        (scroll 
+          :vscroll true
+          :hscroll false
+          :vexpand true
+          (box 
+            :style "
+              transition: 500ms;
+              margin-top: ${-204 * min(max((workspacejson.focused - 1), 0), 2)}px;
+              margin-bottom: ${-204 * min(max((1 - workspacejson.focused), 0), 2)}px;
+            "
+            :orientation "v"
+            (for i in {[0, 1, 2, 3, 4]}
+              (workspacebox 
+                :focused {workspacejson.workspaces[i].focused}
+                :i i))))))))
+
+(defwidget task [a] 
+  (overlay
+    (button
+      :onclick "swaymsg [pid=${a.pid}] focus "
+      (subbox
+        (box 
+          :class "window cont"
+          :orientation "v"
+          :space-evenly false 
+          (box
+            :orientation "h"
+            :space-evenly false
+            (label 
+              :style "font-size: 25px;"
+              :truncate true
+              :halign "start"
+              :text "${a.name}")
+            (box 
+              :hexpand true)
+            (button 
+              :onclick "swaymsg [pid=${a.pid}] kill"
+              (image 
+                :image-width 25 
+                :path "./assets/icons/close.svg")))
+          (label 
+            :truncate true
+            :halign "start"
+            :style "font-size: 25px;"
+            :text "app: ${a.app_id}")
+          (label 
+            :truncate true
+            :halign "start"
+            :style "font-size: 25px;"
+            :text "workspace: ${a.workspace}"))))
+    (box
+      :orientation "v"
+      (box 
+        :halign "end"
+        :valign "start"
+        :class "trred ${a.focused ? 'active' : ''}")
+      (box 
+        :halign "start"
+        :valign "end"
+        :class "blred ${a.focused ? 'active' : ''}"))))
+      
+
+(defwidget workspacebox [i focused]
+  (button
+    :onclick "swaymsg -t command workspace number ${workspacejson.workspaces[i].name}"
+    (overlay
+      (subbox 
+        :class "sub"
+        (box
+          :class "window sub"
+          :space-evenly false 
+          :style "
+            min-width: ${round(1920/5, 0) + 1}px;
+            min-height: ${round(940/5, 0) - 40}px;
+          "))
+      (box 
+        :space-evenly false
+        :style "padding: 8px;"
+        (for j in {windowsjson[i]}
+          (workspacewindow :w j)))
+      (box
+        :orientation "v"
+        (box 
+          :halign "end"
+          :valign "start"
+          :class "trred ${focused ? 'active' : ''}")
+        (box 
+          :halign "start"
+          :valign "end"
+          :class "blred ${focused ? 'active' : ''}")))))
+
+(defwidget workspacewindow [w]
+  (box
+   :style "
+      margin-left: ${round((w.rect.x/5), 0)}px; 
+      margin-top: ${round((w.rect.y/5), 0)}px; 
+      margin-right: -${round((w.rect.x + w.rect.width)/5, 0)}px;
+      margin-bottom: -${round(((w.rect.y + w.rect.height)/5), 0)}px;
+    "
+    :hexpand false
+    :vexpand false 
+    :halign "start"
+    :valign "start"
+    (overlay
+      (subbox 
+        (box 
+          :hexpand true
+          :vexpand true
+          :class "window"))
+      (label 
+        :halign "start"
+        :style "margin: 8px 30px; font-size: 25px;"
+        :truncate true 
+        :valign "start"
+        :text {w.name}))))
+        ; (image 
+        ;   :valign "center"
+        ;   :halign "center"
+        ;   :image-width {round(w.rect.width/7 * 45/100, 0)}
+        ;   :image-height {round(w.rect.height/7 * 45/100, 0)}
+        ;   :path {w.path})))))
