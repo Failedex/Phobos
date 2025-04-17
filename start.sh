@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-swaymsg output '*' bg '#717171' solid_color
+swaymsg output '*' bg '#C0C8CA' solid_color
 swaymsg default_border pixel 2
 swaymsg default_floating_border pixel 2
 swaymsg corner_radius 0
