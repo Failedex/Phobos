@@ -16,30 +16,7 @@
   (box 
     :orientation "h"
     :space-evenly false 
-    (box 
-      :class "window bar"
-      :orientation "h"
-      :space-evenly false
-      (button
-        :onclick "${EWW_CMD} open launcher --toggle"
-        (box 
-          :orientation "h"
-          :space-evenly false
-          :spacing 10
-          (image 
-            :image-width 35
-            :path "./assets/icons/search.svg")
-          (label
-            :class "large"
-            :text "Search"))))
-    (box 
-      :orientation "v"
-      :space-evenly false 
-      (box 
-        :class "triangle bottomleft")
-      (box 
-        :class "window"
-        :vexpand true))
+    (bottomleftstruct)
     (box 
       :class "window"
       :style "margin-top: 20px;"
@@ -79,3 +56,46 @@
           (label
             :class "large"
             :text "Navigation"))))))
+
+(defwidget bottomleftstruct [] 
+  (box
+    :orientation "h"
+    :space-evenly false
+    :vexpand true
+    (box 
+      :class "window bar"
+      :orientation "h"
+      :space-evenly false
+      (box 
+        :orientation "h"
+        :space-evenly false
+        :spacing 10
+        (button
+          :onclick "./scripts/hackslide.sh launcherint &"
+          (image 
+            :image-width 35
+            :path "./assets/icons/search.svg"))
+        (revealer 
+          :reveal reveallauncherint
+          :transition "slideleft"
+          (input
+            :onchange "./scripts/apps.py --query '{}'"
+            :onaccept "(cd && ${appsjson.apps[0].desktop}) & ./scripts/hackslide.sh launcherint &"
+            :width 300)) 
+        (revealer
+          :reveal {!reveallauncherint}
+          :transition "slideright"
+          (button
+            :onclick "./scripts/hackslide.sh launcherint &"
+            (label
+              :class "large"
+              :text "Search")))))
+              
+    (box 
+      :orientation "v"
+      :space-evenly false 
+      (box 
+        :class "triangle bottomleft")
+      (box 
+        :class "window"
+        :vexpand true))))

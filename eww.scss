@@ -112,8 +112,10 @@ label {
 
 entry {
   color: $fg;
-  background-color: $bg;
-  padding: 0px $padding;
+  background-color: $bg2;
+  padding: $padding;
+  margin: 12px 0px 11px 0px;
+  transition: 500ms;
 }
 
 @import "./scss/topbar.scss";

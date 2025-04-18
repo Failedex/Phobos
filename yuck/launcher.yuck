@@ -27,7 +27,7 @@
           (subbox
             (input
               :onchange "./scripts/apps.py --query '{}'"
-              :onaccept "(cd && ${appsjson.apps[0].desktop}) & ${EWW_CMD} close launcher"))
+              :onaccept "(cd && ${appsjson.apps[0].desktop}) & ./scripts/hackslide.sh launcherint &"))
           (scroll 
             :hscroll false
             :vscroll true
@@ -40,10 +40,11 @@
           
 (defwidget app [a]
   (button 
-    :onclick "(cd && ${a.desktop}) & ${EWW_CMD} close launcher"
+    :onclick "(cd && ${a.desktop}) & ./scripts/hackslide.sh launcherint &"
     (subbox 
+      :class "sub"
       (box 
-        :class "window cont"
+        :class "window sub cont"
         :orientation "h" 
         (label 
           :xalign 0 
@@ -51,3 +52,61 @@
           :style "font-size: 25px;"
           :markup "${a.name}")))))
         
+(defvar reveallauncherint false)
+
+(defwindow launcherint 
+  :geometry (geometry
+              :x 0 
+              :y -70 
+              :width 0
+              :height 70
+              :anchor "bottom left")
+  :stacking "overlay"
+  :exclusive true 
+  :focusable true
+  :monitor '["eDP-1", "<primary>", 0]'
+  (box 
+    :orientation "v"
+    :space-evenly false
+    :height 70
+    (revealer
+      :reveal reveallauncherint
+      :transition "slideup"
+      (revealer 
+        :reveal reveallauncherint 
+        :transition "slideright"
+        (box 
+          :orientation "v"
+          :space-evenly false 
+          :style "margin-right: 20px;"
+
+          ;; triangle corner thing
+          (box 
+            :height 20
+            :orientation "h"
+            :space-evenly false 
+            (box 
+              :class "window"
+              :hexpand true)
+            (box 
+              :orientation "v"
+              :space-evenly false 
+              (box 
+                :class "triangle bottomleft")
+              (box 
+                :class "window"
+                :vexpand true)))
+          (box 
+            :class "window cont"
+            :orientation "v"
+            (scroll 
+              :hscroll false
+              :vscroll true
+              :height 400
+              (box 
+                :orientation "v"
+                :space-evenly false
+                (for app in {appsjson.apps}
+                  (app :a app))))))))
+          
+    (bottomleftstruct)))

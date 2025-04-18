@@ -16,6 +16,6 @@ swaymsg client.unfocused        $INACTIVEBGCOLOR $INACTIVEBGCOLOR $INACTIVETEXTC
 swaymsg client.focused_inactive $INACTIVEBGCOLOR $INACTIVEBGCOLOR $INACTIVETEXTCOLOR  $INACTIVEBGCOLOR
 swaymsg client.urgent           $URGENTBGCOLOR    $URGENTBGCOLOR   $TEXTCOLOR          $URGENTBGCOLOR
 
-swaymsg bindsym Mod4+d exec "eww -c ~/.config/eww/phobos open-many launcher --toggle"
+swaymsg bindsym Mod4+d exec "~/.config/eww/phobos/scripts/hackslide.sh launcherint &"
 
 eww -c ./ open-many topbar bottombar notifypopup
