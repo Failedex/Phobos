@@ -13,7 +13,7 @@ $margin: 8px;
   all: unset; 
   color: $fg;
   font-family: "Fairfax HD";
-  font-size: 30px;
+  font-size: 25px;
   font-weight: bold;
 }
 
@@ -37,7 +37,7 @@ tooltip {
 label {
   margin: 0 $margin;
   &.large {
-    font-size: 35px;
+    font-size: 30px;
   }
   &.hard {
     color: $fg2;
@@ -114,10 +114,11 @@ entry {
   color: $fg;
   background-color: $bg2;
   padding: $padding;
-  margin: 12px 0px 11px 0px;
+  margin: 14px 0px 14px 0px;
   transition: 500ms;
 }
 
 @import "./scss/topbar.scss";
 @import "./scss/notifications.scss";
 @import "./scss/tasklist.scss";
+@import "./scss/system.scss";

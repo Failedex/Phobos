@@ -1,4 +1,10 @@
-(defvar version "0.2.0")
+(defvar version "0.2.3")
+
+(defpoll volumemute :initial "false" :interval "2s" "pamixer --get-mute")
+(defpoll volume :initial "0" :interval "2s" "pamixer --get-volume")
+(defpoll brightness :initial "0" :interval "2s" "brightnessctl -m | awk -F, '{print substr($4, 0, length($4)-1)}' | tr -d '%'")
+(defpoll wifiradio :initial "off" :interval "2s" "nmcli radio wifi")
+(defpoll bluetooth :initial "disconnected" :interval "2s" "./scripts/bluetooth.sh --con_status")
 
 (deflisten windowsjson 
   :initial '[{"focused": true, "empty": false, "name": 1}, {"focused": false, "empty": true, "name": 2}, {"focused": false, "empty": true, "name": 3}, {"focused": false, "empty": true, "name": 4}, {"focused": false, "empty": true, "name": 5}]'
@@ -25,4 +31,6 @@
 (include "./yuck/tasklist.yuck")
 (include "./yuck/launcher.yuck")
 (include "./yuck/notifications.yuck")
+(include "./yuck/system.yuck")
+(include "./yuck/osd.yuck")
 (include "./yuck/util.yuck")

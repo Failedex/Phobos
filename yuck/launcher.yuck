@@ -102,7 +102,7 @@
             (scroll 
               :hscroll false
               :vscroll true
-              :height 400
+              :height 480
               (box 
                 :orientation "v"
                 :space-evenly false

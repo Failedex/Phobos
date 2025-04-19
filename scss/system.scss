@@ -1,0 +1,44 @@
+
+scale {
+  trough {
+    min-height: 30px;
+    min-width: 100px;
+    background-color: $bg2;
+    margin: $margin;
+
+    slider {
+      min-height: 20px;
+      min-width: 20px;
+    }
+
+    highlight {
+      background-color: $fg;
+    }
+  }
+}
+
+.switch {
+  // background: linear-gradient(135deg, transparent 12%, $bg2 12%, $bg2 88%,transparent 88%); 
+  background-color: $bg2;
+  min-height: 30px;
+  min-width: 30px;
+  margin: $margin;
+  transition: 500ms;
+  padding: 0px;
+  &.on {
+    padding-right: 25px;
+    background-color: rgba($fg, 0.4);
+  }
+  &.off {
+    padding-left: 25px;
+  }
+}
+
+.switchbg {
+  background-color: $fg;
+}
+
+.knob {
+  background: linear-gradient(135deg, transparent 19%, $fg2 19%, $fg2 81%,transparent 81%); 
+}
+

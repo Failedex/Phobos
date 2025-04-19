@@ -1,0 +1,40 @@
+(defvar revealwsosd false)
+
+(defwindow wsosd 
+  :geometry (geometry 
+              :x 0 
+              :y 20 
+              :width 0
+              :height 710 
+              :anchor "bottom right")
+  :stacking "overlay"
+  :exclusive false 
+  :monitor '["eDP-1", "<primary>", 0]'
+  (revealer 
+    :reveal revealwsosd 
+    :transition "slideleft"
+    (box 
+      :style "margin-right: 20px;"
+      (floatwin 
+        :title "workspaces" 
+        (box 
+          :space-evenly false 
+          :vexpand true 
+          :class "window cont"
+          (scroll 
+            :vscroll true 
+            :hscroll false 
+            :vexpand true
+            (box 
+              :style "
+                transition: 500ms;
+                margin-top: ${-204 * min(max((workspacejson.focused - 1), 0), 2)}px;
+                margin-bottom: ${-204 * min(max((1 - workspacejson.focused), 0), 2)}px;
+              "
+              :orientation "v"
+              (for i in {[0, 1, 2, 3, 4]}
+                (workspacebox 
+                  :focused {workspacejson.workspaces[i].focused}
+                  :i i)))))))))
+    
+  

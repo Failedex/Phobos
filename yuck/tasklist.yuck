@@ -1,78 +1,62 @@
+(defvar revealtasklist false)
 
 (defwindow tasklist 
   :geometry (geometry 
-              :x 20 
+              :x 0 
               :y 20
-              :width 400 
+              :width 0 
               :height 710
               :anchor "bottom right")
   :stacking "overlay"
   :exclusive false 
   :monitor '["eDP-1", "<primary>", 0]'
   :wm-ignore false 
-  (box
-    :orientation "h"
-    :space-evenly false
-    :spacing 16
-    ; (floatwin 
-    ;   :title "tasklist"
-    ;   (box 
-    ;     :vexpand true 
-    ;     :class "window cont"
-    ;     :width 400
-    ;     (subbox 
-    ;       :class "sub"
-    ;       (box 
-    ;         :vexpand true 
-    ;         :class "window sub cont"
-    ;         (scroll 
-    ;           :vscroll true 
-    ;           :hscroll false 
-    ;           :vexpand true
-    ;           (box 
-    ;             :orientation "v"
-    ;             :space-evenly false 
-    ;             (for app in {tasklistjson}
-    ;               (task 
-    ;                 :a app))))))))
-    (floatwin
-      :title "Navigation"
-      (box 
-        :orientation "h"
-        :space-evenly false
-        :vexpand true
-        :class "window cont"
-        (subbox 
-          :class "sub"
-          (box 
-            :vexpand true 
-            :width 400
-            :class "window sub cont"
-            (scroll 
-              :vscroll true 
-              :hscroll false 
-              :vexpand true
-              (box 
-                :orientation "v"
-                :space-evenly false 
-                (for app in {tasklistjson}
-                  (task 
-                    :a app))))))
-        (scroll 
-          :vscroll true
-          :hscroll false
+  (revealer
+    :reveal revealtasklist
+    :transition "slideleft"
+    (box
+      :orientation "h"
+      :space-evenly false
+      :style "margin-right: 20px;"
+      :spacing 16
+      (floatwin
+        :title "Navigation"
+        (box 
+          :orientation "h"
+          :space-evenly false
           :vexpand true
-          (box 
-            :style "
-              transition: 500ms;
-              margin-top: ${-204 * min(max((workspacejson.focused - 1), 0), 2)}px;
-              margin-bottom: ${-204 * min(max((1 - workspacejson.focused), 0), 2)}px;
-            "
-            :orientation "v"
-            (for i in {[0, 1, 2, 3, 4]}
-              (workspacebox 
-                :focused {workspacejson.workspaces[i].focused}
-                :i i))))))))
+          :class "window cont"
+          (subbox 
+            :class "sub"
+            (box 
+              :vexpand true 
+              :width 400
+              :class "window sub cont"
+              (scroll 
+                :vscroll true 
+                :hscroll false 
+                :vexpand true
+                (box 
+                  :orientation "v"
+                  :space-evenly false 
+                  (for app in {tasklistjson}
+                    (task 
+                      :a app))))))
+          (scroll 
+            :vscroll true
+            :hscroll false
+            :vexpand true
+            (box 
+              :style "
+                transition: 500ms;
+                margin-top: ${-204 * min(max((workspacejson.focused - 1), 0), 2)}px;
+                margin-bottom: ${-204 * min(max((1 - workspacejson.focused), 0), 2)}px;
+              "
+              :orientation "v"
+              (for i in {[0, 1, 2, 3, 4]}
+                (workspacebox 
+                  :focused {workspacejson.workspaces[i].focused}
+                  :i i)))))))))
 
 (defwidget task [a] 
   (overlay

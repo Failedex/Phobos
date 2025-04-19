@@ -39,7 +39,7 @@
       :class "window bar"
       (image 
         :tooltip "${EWW_BATTERY.BAT0.capacity}%"
-        :image-width 35
+        :image-width 30
         :path "./assets/icons/bat${ EWW_BATTERY.BAT0.status == 'Charging' ? 'c' : min(round(EWW_BATTERY.BAT0.capacity / 25, 0), 3)}.svg")
       (label 
         :class "large"
