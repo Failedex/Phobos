@@ -11,7 +11,7 @@
   :exclusive false 
   :monitor '["eDP-1", "<primary>", 0]'
   (revealer 
-    :reveal revealwsosd 
+    :reveal {revealwsosd && revealbar == 1 && !revealtasklistint && !revealsystemint} 
     :transition "slideleft"
     (box 
       :style "margin-right: 20px;"

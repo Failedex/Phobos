@@ -16,11 +16,11 @@ swaymsg client.unfocused        $INACTIVEBGCOLOR $INACTIVEBGCOLOR $INACTIVETEXTC
 swaymsg client.focused_inactive $INACTIVEBGCOLOR $INACTIVEBGCOLOR $INACTIVETEXTCOLOR  $INACTIVEBGCOLOR
 swaymsg client.urgent           $URGENTBGCOLOR    $URGENTBGCOLOR   $TEXTCOLOR          $URGENTBGCOLOR
 
-swaymsg bindsym Mod4+d exec "~/.config/eww/phobos/scripts/hackslide.sh launcherint &"
+swaymsg bindsym Mod4+d exec "eww -c ~/.config/eww/phobos update revealbar=1 & ~/.config/eww/phobos/scripts/hackslide.sh launcherint &"
 
 for i in {1..5}
 do 
     swaymsg bindsym Mod4+$i exec "~/.config/eww/phobos/scripts/wsswitch.sh $i"
 done
 
-eww -c ./ open-many topbar bottombar notifypopup
+eww -c ./ open-many topbar bottombar notifypopup barslide 

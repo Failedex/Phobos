@@ -4,7 +4,7 @@
               :x 0
               :y 0
               :width "100%"
-              :height 70
+              :height 0
               :anchor "bottom center")
   :stacking "bottom"
   :exclusive true 
@@ -13,14 +13,25 @@
   (bottombarstruct))
 
 (defwidget bottombarstruct [] 
+  (revealer
+    :reveal {revealbar == 1}
+    :transition "slideup"
+    (box 
+      :orientation "h"
+      :space-evenly false 
+      :height 70
+      (bottomleftstruct)
+      (box 
+        :class "window"
+        :style "margin-top: 20px;"
+        :hexpand true)
+      (bottomrightstruct))))
+
+(defwidget bottomrightstruct [] 
   (box 
     :orientation "h"
     :space-evenly false 
-    (bottomleftstruct)
-    (box 
-      :class "window"
-      :style "margin-top: 20px;"
-      :hexpand true)
+    :vexpand true 
     (box 
       :orientation "v"
       :space-evenly false 
@@ -30,34 +41,46 @@
         :class "window"
         :vexpand true))
     (box 
-      :orientation "h"
-      :space-evenly false 
       :class "window bar"
-      :spacing 20
-      (button
-        :onclick "./scripts/hackslide.sh system &"
-        (box 
-          :orientation "h"
-          :space-evenly false
-          :spacing 10
-          (image 
-            :image-width 30
-            :path "./assets/icons/hamburg.svg")
-          (label
-            :class "large"
-            :text "System")))
-      (button
-        :onclick "./scripts/hackslide.sh tasklist &"
-        (box 
-          :orientation "h"
-          :space-evenly false
-          :spacing 10
-          (image 
-            :image-width 30
-            :path "./assets/icons/file.svg")
-          (label
-            :class "large"
-            :text "Navigation"))))))
+      :hexpand true
+      :width 404
+      (box
+        :orientation "h"
+        :halign "end"
+        :hexpand false
+        :height 70
+        :space-evenly false
+        :spacing 20
+        (revealer
+          :reveal {!revealtasklistint}
+          :transition "slideleft"
+          (button
+            :onclick "./scripts/hackslide.sh systemint &"
+            (box 
+              :orientation "h"
+              :space-evenly false
+              :spacing 10
+              (image 
+                :image-width 35
+                :path "./assets/icons/hamburg.svg")
+              (label
+                :class "large"
+                :text "System"))))
+        (revealer
+          :reveal {!revealsystemint}
+          :transition "slideright"
+          (button
+            :onclick "./scripts/hackslide.sh tasklistint &"
+            (box 
+              :orientation "h"
+              :space-evenly false
+              :spacing 10
+              (image 
+                :image-width 35
+                :path "./assets/icons/file.svg")
+              (label
+                :class "large"
+                :text "Navigation"))))))))
 
 (defwidget bottomleftstruct [] 
   (box
@@ -71,11 +94,11 @@
       (box 
         :orientation "h"
         :space-evenly false
-        :spacing 10
         (button
+          :style "margin-right: 10px;"
           :onclick "./scripts/hackslide.sh launcherint &"
           (image 
-            :image-width 30
+            :image-width 35
             :path "./assets/icons/search.svg"))
         (revealer 
           :reveal reveallauncherint
@@ -86,6 +109,7 @@
             :width 300)) 
         (revealer
           :reveal {!reveallauncherint}
+          :halign "start"
           :transition "slideright"
           (button
             :onclick "./scripts/hackslide.sh launcherint &"

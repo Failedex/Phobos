@@ -1,0 +1,23 @@
+
+(defwindow barslide 
+  :geometry (geometry 
+              :x 0 
+              :y -70 
+              :width 1100
+              :height 100
+              :anchor "top center")
+  :stacking "bottom"
+  :exclusive false 
+  :monitor '["eDP-1", "<primary>", 0]'
+  (eventbox
+    :cursor "row-resize"
+    :style "opacity: 0;"
+    (scale 
+      :class "hideslide"
+      :hexpand true
+      :min 0 
+      :max 2
+      :value revealbar 
+      :onchange "${EWW_CMD} update revealbar={}"
+      :orientation "v")))
+  

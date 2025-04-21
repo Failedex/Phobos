@@ -52,3 +52,28 @@
         :hexpand true)
       (box 
         :class "triangle${class} topleft"))))
+
+(defwidget subboxl [?class]
+  (box 
+    :style "margin: 8px;"
+    :orientation "v"
+    :space-evenly false 
+    (box 
+      :orientation "h"
+      :space-evenly false 
+      (box 
+        :class "window ${class}"
+        :hexpand true)
+      (box 
+        :class "triangle${class} bottomleft"))
+         
+    (children)
+        
+    (box 
+      :orientation "h"
+      :space-evenly false 
+      (box 
+        :class "triangle${class} topright")
+      (box 
+        :class "window ${class}"
+        :hexpand true))))

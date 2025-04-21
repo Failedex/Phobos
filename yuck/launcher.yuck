@@ -41,7 +41,7 @@
 (defwidget app [a]
   (button 
     :onclick "(cd && ${a.desktop}) & ./scripts/hackslide.sh launcherint &"
-    (subbox 
+    (subboxl 
       :class "sub"
       (box 
         :class "window sub cont"

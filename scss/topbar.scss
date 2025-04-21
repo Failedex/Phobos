@@ -4,3 +4,33 @@
     margin: 0px;
   }
 }
+
+.hideslide {
+  opacity: 0;
+  all: unset;
+  trough {
+    min-width: 1100px;
+    slider {
+      min-width: 1100px;
+      margin: -200px 0px;
+    }
+  }
+}
+
+.batscale {
+  all: unset;
+  trough {
+    margin: 29px 8px;
+    min-height: 11px;
+    min-width: 16px;
+    background-color: transparent;
+    slider {
+      min-width: 0px;
+      min-height: 0px;
+      margin: 0px;
+    }
+    highlight {
+      background-color: $fg;
+    }
+  }
+}

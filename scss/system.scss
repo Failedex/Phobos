@@ -42,3 +42,10 @@ scale {
   background: linear-gradient(135deg, transparent 19%, $fg2 19%, $fg2 81%,transparent 81%); 
 }
 
+.pcover {
+  transition: 500ms;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin: $margin;
+}

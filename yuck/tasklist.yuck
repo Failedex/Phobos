@@ -21,42 +21,93 @@
       :spacing 16
       (floatwin
         :title "Navigation"
+        (tasklistwid)))))
+
+(defvar revealtasklistint false)
+
+(defwindow tasklistint 
+  :geometry (geometry
+              :x 0 
+              :y -70 
+              :width 0
+              :height 70
+              :anchor "bottom right")
+  :stacking "overlay"
+  :monitor '["eDP-1", "<primary>", 0]'
+  (box 
+    :orientation "v"
+    :space-evenly false
+    :height 70
+    (revealer
+      :halign "end"
+      :reveal revealtasklistint
+      :transition "slideleft"
+      ; (revealer 
+      ;   :reveal revealtasklistint 
+      ;   :transition "slideup"
         (box 
-          :orientation "h"
-          :space-evenly false
-          :vexpand true
-          :class "window cont"
-          (subbox 
-            :class "sub"
+          :orientation "v"
+          :space-evenly false 
+          :style "margin-left: 20px;"
+
+          ;; triangle corner thing
+          (box 
+            :height 20
+            :orientation "h"
+            :space-evenly false 
             (box 
-              :vexpand true 
-              :width 400
-              :class "window sub cont"
-              (scroll 
-                :vscroll true 
-                :hscroll false 
-                :vexpand true
-                (box 
-                  :orientation "v"
-                  :space-evenly false 
-                  (for app in {tasklistjson}
-                    (task 
-                      :a app))))))
-          (scroll 
-            :vscroll true
-            :hscroll false
-            :vexpand true
-            (box 
-              :style "
-                transition: 500ms;
-                margin-top: ${-204 * min(max((workspacejson.focused - 1), 0), 2)}px;
-                margin-bottom: ${-204 * min(max((1 - workspacejson.focused), 0), 2)}px;
-              "
               :orientation "v"
-              (for i in {[0, 1, 2, 3, 4]}
-                (workspacebox 
-                  :focused {workspacejson.workspaces[i].focused}
-                  :i i)))))))))
+              :space-evenly false 
+              (box 
+                :class "triangle bottomright")
+              (box 
+                :class "window"
+                :vexpand true))
+            (box 
+              :class "window"
+              :hexpand true))
+
+          (tasklistwid)))
+    (bottomrightstruct)))
+
+(defwidget tasklistwid []
+  (box 
+     :orientation "h"
+     :space-evenly false
+     :vexpand true
+     :class "window cont"
+     :height 628
+     (subbox 
+       :class "sub"
+       (box 
+         :vexpand true 
+         :width 400
+         :class "window sub cont"
+         (scroll 
+           :vscroll true 
+           :hscroll false 
+           :vexpand true
+           (box 
+             :orientation "v"
+             :space-evenly false 
+             (for app in {tasklistjson}
+               (task 
+                 :a app))))))
+     (scroll 
+       :vscroll true
+       :hscroll false
+       :vexpand true
+       (box 
+         :style "
+           transition: 500ms;
+           margin-top: ${-204 * min(max((workspacejson.focused - 1), 0), 2)}px;
+           margin-bottom: ${-204 * min(max((1 - workspacejson.focused), 0), 2)}px;
+         "
+         :orientation "v"
+         (for i in {[0, 1, 2, 3, 4]}
+           (workspacebox 
+             :focused {workspacejson.workspaces[i].focused}
+             :i i))))))
 
 (defwidget task [a] 
   (overlay

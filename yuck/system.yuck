@@ -14,43 +14,157 @@
     :reveal revealsystem
     :transition "slideleft"
     (box 
+      :orientation "v"
       :space-evenly false 
       :style "margin-right: 20px;"
+      :spacing 16
+      (floatwin 
+        :title "Media"
+        :visible {playerctl.song != ""}
+        (mediawid))
+        
       (floatwin 
         :title "System"
+        (systemwid)))))
+
+(defvar revealsystemint false)
+
+(defwindow systemint 
+  :geometry (geometry
+              :x 0 
+              :y -70 
+              :width 0
+              :height 70
+              :anchor "bottom right")
+  :stacking "overlay"
+  :exclusive false 
+  :monitor '["eDP-1", "<primary>", 0]'
+  (box 
+    :orientation "v"
+    :space-evenly false 
+    :height 70
+    (revealer 
+      :halign "end"
+      :reveal revealsystemint
+      :transition "slideleft"
         (box 
           :orientation "v"
-          :space-evenly false 
-          :width 400
-          :vexpand true 
-          :class "window cont"
-          (slidectl
-            :icon {volumemute ? "./assets/icons/volumemute.svg" : "./assets/icons/volume.svg"}
-            :val volume
-            :name "Volume"
-            :onchange "pamixer --set-volume {}")
-          (slidectl
-            :icon "./assets/icons/sun.svg"
-            :val brightness
-            :name "Brightness"
-            :onchange "brightnessctl set {}%")
-          (togglectl 
-            :icon {wifiradio == "enabled" ? "./assets/icons/wifi.svg" : "./assets/icons/wifioff.svg"}
-            :val {wifiradio == "enabled"} 
-            :name "Wifi"
-            :command {wifiradio == "enabled" ? "nmcli radio wifi off" : "nmcli radio wifi on"})
-          (togglectl 
-            :icon "./assets/icons/bluetooth.svg"
-            :val {bluetooth != "disabled"} 
-            :name "Bluetooth"
-            :command "./scripts/bluetooth.sh --toggle")
-          (togglectl 
-            :icon "./assets/icons/bell.svg"
-            :val {!notifications.dnd} 
-            :name "Notifications"
-            :command "./scripts/notifManage --toggle"))))))
+          :space-evenly false
+          :style "margin-left: 20px;"
 
-(defvar testval false)
+          ;; triangle corner 
+          (box 
+            :height 20
+            :orientation "h"
+            :space-evenly false 
+            (box 
+              :orientation "v"
+              :space-evenly false 
+              (box 
+                :class "triangle bottomright")
+              (box 
+                :class "window"
+                :vexpand true))
+            (box 
+              :class "window"
+              :hexpand true))
+
+          (systemwid)))
+    (bottomrightstruct)))
+          
+
+(defwidget systemwid []
+  (box 
+    :orientation "v"
+    :space-evenly false 
+    :width 404
+    :vexpand true 
+    :class "window cont"
+    (slidectl
+      :icon {volumemute ? "./assets/icons/volumemute.svg" : "./assets/icons/volume.svg"}
+      :val volume
+      :name "Volume"
+      :onchange "pamixer --set-volume {}")
+    (slidectl
+      :icon "./assets/icons/sun.svg"
+      :val brightness
+      :name "Brightness"
+      :onchange "brightnessctl set {}%")
+    (togglectl 
+      :icon {wifiradio == "enabled" ? "./assets/icons/wifi.svg" : "./assets/icons/wifioff.svg"}
+      :val {wifiradio == "enabled"} 
+      :name "Wifi"
+      :command {wifiradio == "enabled" ? "nmcli radio wifi off" : "nmcli radio wifi on"})
+    (togglectl 
+      :icon "./assets/icons/bluetooth.svg"
+      :val {bluetooth != "disabled"} 
+      :name "Bluetooth"
+      :command "./scripts/bluetooth.sh --toggle")
+    (togglectl 
+      :icon "./assets/icons/bell.svg"
+      :val {!notifications.dnd} 
+      :name "Notifications"
+      :command "./scripts/notifManage --toggle")))
+
+(defwidget mediawid []
+ (box
+   :class "window cont"
+   :orientation "h"
+   :space-evenly false
+   (overlay
+     (box 
+       :class "pcover"
+       :width 110
+       :height 110
+       :style "background-image: url('${pcover}');")
+     (box 
+       :halign "start"
+       :valign "start"
+       :style "margin: 8px;"
+       :class "triangle topleft")
+     (box 
+       :halign "end"
+       :valign "end"
+       :style "margin: 8px;"
+       :class "triangle bottomright"))
+   (box 
+     :orientation "v"
+     :space-evenly false 
+     :hexpand true
+     :class "window cont"
+     (scroll
+       :hscroll true 
+       :vscroll false
+       :hexpand true
+       (label 
+         :truncate true
+         :text {playerctl.song}))
+     (scroll
+       :hscroll true 
+       :vscroll false
+       :hexpand true
+       (label 
+         :truncate true
+         :text {playerctl.artist}))
+     (box 
+       :orientation "h"
+       :halign "center"
+       :spacing 16
+       (button 
+         :onclick "playerctl previous"
+         (image 
+           :image-width 35
+           :path "./assets/icons/prev.svg"))
+       (button 
+         :onclick "playerctl play-pause"
+         (image 
+           :image-width 35
+           :path "./assets/icons/${playerctl.status == 'Playing' ? 'pause' : 'play'}.svg"))
+       (button 
+         :onclick "playerctl next"
+         (image 
+           :image-width 35
+           :path "./assets/icons/next.svg"))))))
 
 (defwidget slidectl [icon onchange val name]
   (box 
