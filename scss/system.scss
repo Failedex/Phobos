@@ -55,5 +55,21 @@ scale {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  margin: 3 * $margin;
+  margin: 0px 3 * $margin;
+}
+
+.snote {
+  background-color: lightskyblue;
+  margin: $margin;
+  padding: $padding;
+  label {
+    font-size: 20px;
+    color: black;
+  }
+}
+
+.notecorner {
+   border-style: solid;
+   border-width: 0 20px 20px 0;
+   border-color: transparent #4d9fd1 transparent transparent;
 }

@@ -53,84 +53,119 @@
     :height 250
     :space-evenly false
     :orientation "v"
-    (box 
-      :halign "center"
-      :orientation "h"
-      :space-evenly false
-      :spacing 8
-      (overlay
-        (subbox
-          :class "sub"
-          (box
-            :class "window sub"
-            :width 200 
-            :height 160))
-        (box 
-          :halign "end"
-          :valign "end"
-          :style "margin: 8px;"
-          :class "trianglesub large bottomright")
+    (subbox
+      :class "sub"
+      :hexpand true
+      (box
+        :orientation "h"
+        :space-evenly false
+        :class "window sub"
         (transform
           :transform-origin-x "50%"
           :transform-origin-y "50%"
           :rotate {(sin(anim * (2 * PI) / 500)) + 0.2}
           (box 
-            :width 200
-            :height 200
+            :width 150
+            :height 102
             :orientation "h"
             :space-evenly false 
             :class "rcover"
-            :style "background-image: url('${pcover}');")))
-      (box 
-        :halign "center"
-        :class "trianglesub topleft large"
-        :valign "end"
-        :style "margin-left: -16px; margin-bottom: 8px;")
+            :style "background-image: url('${pcover}');"))
+
+        (box 
+          :orientation "v"
+          :space-evenly false 
+          :hexpand true
+          :valign "center"
+          :class "window sub"
+          (scroll
+           :hscroll true 
+           :vscroll false
+           :hexpand true
+           (label 
+             :truncate true
+             :text {playerctl.song}))
+          (scroll
+           :hscroll true 
+           :vscroll false
+           :hexpand true
+           (label 
+             :truncate true
+             :text {playerctl.artist}))
+          (box 
+           :orientation "h"
+           :halign "center"
+           :spacing 16
+           (button 
+             :onclick "playerctl previous"
+             (image 
+               :image-width 35
+               :path "./assets/icons/prev.svg"))
+           (button 
+             :onclick "playerctl play-pause"
+             (image 
+               :image-width 35
+               :path "./assets/icons/${playerctl.status == 'Playing' ? 'pause' : 'play'}.svg"))
+           (button 
+             :onclick "playerctl next"
+             (image 
+               :image-width 35
+               :path "./assets/icons/next.svg"))))))
+
+    (box 
+      :halign "end"
+      :class "trianglesub topleft large"
+      :style "margin-right: 28px; margin-top: -8px;")
+
+    (box 
+      :height 150
+      :orientation "h"
+      :halign "start"
+      :space-evenly false
+      :spacing 35
+      (box)
+      (box
+        :width 150
+        (stickynote))
       (image
         :valign "end"
         :image-width 100
         :class "window cont"
-        :path "./assets/LittleD/d_idle20001_${dynanim}.png")) 
+        :path "./assets/LittleD/d_idle20001_${dynanim}.png")))) 
         
-    (box 
-      :orientation "v"
-      :space-evenly false 
-      :hexpand true
-      :class "window cont"
-      (scroll
-       :hscroll true 
-       :vscroll false
-       :hexpand true
-       (label 
-         :truncate true
-         :text {playerctl.song}))
-      (scroll
-       :hscroll true 
-       :vscroll false
-       :hexpand true
-       (label 
-         :truncate true
-         :text {playerctl.artist}))
+(defwidget stickynote []
+  (transform
+    :transform-origin-x "50%"
+    :transform-origin-y "50%"
+    :rotate -2
+    (overlay
       (box 
-       :orientation "h"
-       :halign "center"
-       :spacing 16
-       (button 
-         :onclick "playerctl previous"
-         (image 
-           :image-width 35
-           :path "./assets/icons/prev.svg"))
-       (button 
-         :onclick "playerctl play-pause"
-         (image 
-           :image-width 35
-           :path "./assets/icons/${playerctl.status == 'Playing' ? 'pause' : 'play'}.svg"))
-       (button 
-         :onclick "playerctl next"
-         (image 
-           :image-width 35
-           :path "./assets/icons/next.svg"))))))
-    
+        :halign "center"
+        :valign "center"
+        :width 128
+        :height 128
+        :class "snote"
+        :orientation "v"
+        :space-evenly false
+        (label 
+          :halign "start"
+          :valign "start"
+          :justify "center"
+          :wrap true
+          :text "Please \\ndo not \\nfeed")
+        (image 
+          :image-width 35
+          :path "./assets/arrow.png"))
+      (box 
+        :halign "start"
+        :valign "end"
+        :style "margin: 18px 18px;"
+        :class "triangle bottomleft")
+      (box 
+        :halign "start"
+        :valign "end"
+        :style "margin: 18px 18px;"
+        :class "notecorner"))))
 
 (defwidget mediawid []
  (box
