@@ -49,7 +49,7 @@
 (defwidget dynamix []
   (box
     :class "window cont"
-    :width 400
+    :width 432
     :height 250
     :space-evenly false
     :orientation "v"
