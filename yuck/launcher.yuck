@@ -77,7 +77,7 @@
         :reveal reveallauncherint 
         :transition "slideright"
         (box 
-          :width 377
+          :width 397
           :orientation "v"
           :space-evenly false 
           :style "margin-right: 20px;"
