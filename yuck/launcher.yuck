@@ -69,13 +69,15 @@
     :orientation "v"
     :space-evenly false
     :height 70
-    (revealer
-      :reveal reveallauncherint
-      :transition "slideup"
+    ; (revealer
+    ;   :reveal reveallauncherint
+    ;   :transition "slideup"
       (revealer 
+        :halign "start"
         :reveal reveallauncherint 
         :transition "slideright"
         (box 
+          :width 377
           :orientation "v"
           :space-evenly false 
           :style "margin-right: 20px;"
@@ -107,6 +109,6 @@
                 :orientation "v"
                 :space-evenly false
                 (for app in {appsjson.apps}
-                  (app :a app))))))))
+                  (app :a app)))))))
           
     (bottomleftstruct)))

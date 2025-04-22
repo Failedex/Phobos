@@ -80,6 +80,17 @@
     :width 404
     :vexpand true 
     :class "window cont"
+    (box 
+      :orientation "h"
+      :space-evenly false 
+      :class "window cont"
+      :visible {playerctl.song != ""}
+      (image 
+        :image-width 35 
+        :path "./assets/icons/libmedia.svg")
+      (label 
+        :text "Media"))
+    (mediawid)
     (slidectl
       :icon {volumemute ? "./assets/icons/volumemute.svg" : "./assets/icons/volume.svg"}
       :val volume
@@ -105,66 +116,6 @@
       :val {!notifications.dnd} 
       :name "Notifications"
       :command "./scripts/notifManage --toggle")))
-
-(defwidget mediawid []
- (box
-   :class "window cont"
-   :orientation "h"
-   :space-evenly false
-   (overlay
-     (box 
-       :class "pcover"
-       :width 110
-       :height 110
-       :style "background-image: url('${pcover}');")
-     (box 
-       :halign "start"
-       :valign "start"
-       :style "margin: 8px;"
-       :class "triangle topleft")
-     (box 
-       :halign "end"
-       :valign "end"
-       :style "margin: 8px;"
-       :class "triangle bottomright"))
-   (box 
-     :orientation "v"
-     :space-evenly false 
-     :hexpand true
-     :class "window cont"
-     (scroll
-       :hscroll true 
-       :vscroll false
-       :hexpand true
-       (label 
-         :truncate true
-         :text {playerctl.song}))
-     (scroll
-       :hscroll true 
-       :vscroll false
-       :hexpand true
-       (label 
-         :truncate true
-         :text {playerctl.artist}))
-     (box 
-       :orientation "h"
-       :halign "center"
-       :spacing 16
-       (button 
-         :onclick "playerctl previous"
-         (image 
-           :image-width 35
-           :path "./assets/icons/prev.svg"))
-       (button 
-         :onclick "playerctl play-pause"
-         (image 
-           :image-width 35
-           :path "./assets/icons/${playerctl.status == 'Playing' ? 'pause' : 'play'}.svg"))
-       (button 
-         :onclick "playerctl next"
-         (image 
-           :image-width 35
-           :path "./assets/icons/next.svg"))))))
 
 (defwidget slidectl [icon onchange val name]
   (box 

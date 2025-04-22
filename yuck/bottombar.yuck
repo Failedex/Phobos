@@ -46,7 +46,7 @@
       :width 404
       (box
         :orientation "h"
-        :halign "end"
+        :halign "center"
         :hexpand false
         :height 70
         :space-evenly false

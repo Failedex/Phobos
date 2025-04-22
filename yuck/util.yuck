@@ -28,11 +28,12 @@
       (box 
         :class "triangle topleft large"))))
 
-(defwidget subbox [?class]
+(defwidget subbox [?class ?hexpand]
   (box 
     :style "margin: 8px;"
     :orientation "v"
     :space-evenly false 
+    :hexpand {hexpand == true}
     (box 
       :orientation "h"
       :space-evenly false 

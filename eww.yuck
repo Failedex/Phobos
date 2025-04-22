@@ -29,6 +29,8 @@
     '
     "./scripts/notifCatch")
 
+(deflisten anim :initial 0 "python ./scripts/anim.py")
+
 (defvar revealbar 1)
 
 (include "./yuck/topbar.yuck")
@@ -39,4 +41,5 @@
 (include "./yuck/system.yuck")
 (include "./yuck/osd.yuck")
 (include "./yuck/barslide.yuck")
+(include "./yuck/media.yuck")
 (include "./yuck/util.yuck")

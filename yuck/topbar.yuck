@@ -20,33 +20,7 @@
       :orientation "h"
       :space-evenly false
       :height 70
-      (box 
-        :class "window bar"
-        :orientation "h"
-        :space-evenly false
-        (revealer 
-          :reveal {playerctl.song == ""}
-          :transition "slideright"
-          (label 
-            :class "large"
-            :text "PHOBOS v${version}"))
-        (revealer 
-          :reveal {playerctl.song != ""}
-          :transition "slideleft"
-          (button 
-            (label 
-              :limit-width 30
-              :class "large"
-              :truncate true
-              :text {playerctl.song}))))
-      (box
-        :orientation "v"
-        :space-evenly false
-        (box
-          :class "window"
-          :vexpand true)
-        (box 
-          :class "triangle topleft"))
+      (topleftstruct)
       (box 
         :orientation "h"
         :space-evenly false
@@ -106,6 +80,41 @@
             :class "hard large"
             :cur {substring(formattime(EWW_TIME, '%M'), 1, 1)}))))))
 
+(defwidget topleftstruct [] 
+  (box 
+    :orientation "h"
+    :space-evenly false 
+    :vexpand true
+    (box 
+      :class "window bar"
+      :orientation "h"
+      :space-evenly false
+      :height 70
+      (revealer 
+        :reveal {playerctl.song == ""}
+        :transition "slideright"
+        (label 
+          :class "large"
+          :text "PHOBOS v${version}"))
+      (revealer 
+        :reveal {playerctl.song != ""}
+        :transition "slideleft"
+        (button 
+          :width 400
+          :onclick "./scripts/hackslide.sh mediaint &"
+          (label 
+            :limit-width 30
+            :class "large"
+            :truncate true
+            :text {playerctl.song}))))
+    (box
+      :orientation "v"
+      :space-evenly false
+      (box
+        :class "window"
+        :vexpand true)
+      (box 
+        :class "triangle topleft"))))
 (defwidget animdigit [cur class]
   (stack 
     :selected cur

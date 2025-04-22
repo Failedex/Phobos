@@ -49,3 +49,11 @@ scale {
   background-position: center;
   margin: $margin;
 }
+
+.rcover {
+  transition: 500ms;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin: 3 * $margin;
+}

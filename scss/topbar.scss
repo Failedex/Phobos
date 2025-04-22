@@ -6,15 +6,30 @@
 }
 
 .hideslide {
-  opacity: 0;
   all: unset;
   trough {
-    min-width: 1100px;
+    min-width: 400px;
+    background-color: transparent;
     slider {
-      min-width: 1100px;
-      margin: -200px 0px;
+      min-width: 400px;
+      min-height: 10px;
+      background-color: transparent;
+      margin: -100px 0px;
+    }
+    highlight {
+      background-color: transparent;
     }
   }
+}
+
+.fakehandle {
+  min-width: 200px;
+  min-height: 8px;
+  margin: 4;
+  background-color: transparent;
+  transition: 500ms;
+  background-color: $fg2;
+  border-radius: 4px;
 }
 
 .batscale {
