@@ -102,14 +102,21 @@
         (button 
           :width 400
           :onclick "./scripts/hackslide.sh mediaint &"
-          (scroll 
-            :hscroll true 
+          (box 
+            :orientation "h"
             :hexpand true
-            (label 
-              ; :limit-width 30
-              :class "large"
-              :truncate true
-              :text {playerctl.song})))))
+            :space-evenly false
+            (image 
+              :image-width 35 
+              :path "./assets/icons/libmedia.svg")
+            (scroll 
+              :hscroll true 
+              :hexpand true
+              (label 
+                ; :limit-width 30
+                :class "large"
+                :truncate true
+                :text {playerctl.song}))))))
     (box
       :orientation "v"
       :space-evenly false

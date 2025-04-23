@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-swaymsg output '*' bg '#8b8e8f' solid_color
+swaymsg output '*' bg $(pwd)/wall/the-chaffins-syhIpeHdLdM-unsplash.jpg fill 
 swaymsg default_border pixel 2
 swaymsg default_floating_border pixel 2
 swaymsg corner_radius 0
