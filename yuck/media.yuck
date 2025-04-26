@@ -96,17 +96,20 @@
            :orientation "h"
            :halign "center"
            :spacing 16
-           (button 
+           (eventbox 
+             :cursor "pointer"
              :onclick "playerctl previous"
              (image 
                :image-width 35
                :path "./assets/icons/prev.svg"))
-           (button 
+           (eventbox 
+             :cursor "pointer"
              :onclick "playerctl play-pause"
              (image 
                :image-width 35
                :path "./assets/icons/${playerctl.status == 'Playing' ? 'pause' : 'play'}.svg"))
-           (button 
+           (eventbox 
+             :cursor "pointer"
              :onclick "playerctl next"
              (image 
                :image-width 35
@@ -213,17 +216,20 @@
        :orientation "h"
        :halign "center"
        :spacing 16
-       (button 
+       (eventbox
+         :cursor "pointer"
          :onclick "playerctl previous"
          (image 
            :image-width 35
            :path "./assets/icons/prev.svg"))
-       (button 
+       (eventbox
+         :cursor "pointer"
          :onclick "playerctl play-pause"
          (image 
            :image-width 35
            :path "./assets/icons/${playerctl.status == 'Playing' ? 'pause' : 'play'}.svg"))
-       (button 
+       (eventbox
+         :cursor "pointer"
          :onclick "playerctl next"
          (image 
            :image-width 35

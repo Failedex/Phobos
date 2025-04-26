@@ -19,52 +19,65 @@
         (singlenotif :noti n)))))
 
 (defwidget singlenotif [noti]
-  (button
+  (eventbox
+    :cursor "pointer"
     :class "notif"
     :onclick "./scripts/notifManage --close ${noti.id}"
     :tooltip "${noti.time}"
     (box 
-      :orientation "h"
+      :orientation "v"
       :space-evenly false
       (box 
-        :orientation "v"
+        :orientation "h"
         :space-evenly false 
         (box 
           :class "triangle bottomright large")
         (box 
           :class "window"
-          :vexpand true))
+          :hexpand true))
+
+      (box 
+        :class "window"
+        (box 
+          :style "margin: 0px 0px"
+          (notilayout
+            :noti noti
+            :visible true)))
+            
       (box 
         :orientation "h"
-        :class "window cont"
-        :space-evenly false 
-        (box 
-          :valign "start"
-          :class "notiimage"
-          :visible {noti.image != "null"}
-          :width 80
-          :height 80
-          :style "background-image: url('${noti.image}');")
-        (box 
-          :vexpand true
-          :hexpand true
-          :orientation "v"
-          :space-evenly false
-          (label 
-            :wrap true
-            :markup "<b>${noti.summary}</b>")
-          (label 
-            :wrap true
-            :visible {noti.body != "null"}
-            :text {noti.body})))
-      (box 
-        :orientation "v"
         :space-evenly false 
         (box 
           :class "window"
-          :vexpand true)
+          :hexpand true)
         (box 
           :class "triangle topleft large")))))
       
       
-             
+(defwidget notilayout [noti visible] 
+  (box 
+    :orientation "h"
+    :style {visible ? "" : "opacity: 0;"}
+    :class "window cont trans"
+    :space-evenly false 
+    :hexpand true
+    :vexpand true
+    (box 
+      :valign "start"
+      :class "notiimage"
+      :visible {noti.image != "null"}
+      :width 80
+      :height 80
+      :style "background-image: url('${noti.image}');")
+    (box 
+      :vexpand true
+      :hexpand true
+      :orientation "v"
+      :space-evenly false
+      (label 
+        :wrap true
+        :markup "<b>${noti.summary}</b>")
+      (label 
+        :wrap true
+        :visible {noti.body != "null"}
+        :text {noti.body}))))

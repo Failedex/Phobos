@@ -39,7 +39,8 @@
                 (app :a app)))))))))
           
 (defwidget app [a]
-  (button 
+  (eventbox
+    :cursor "pointer"
     :onclick "(cd && ${a.desktop}) & ./scripts/hackslide.sh launcherint &"
     (subboxl 
       :class "sub"
@@ -99,16 +100,20 @@
                 :class "window"
                 :vexpand true)))
           (box 
-            :class "window cont"
-            :orientation "v"
-            (scroll 
-              :hscroll false
-              :vscroll true
-              :height 480
+            :class "window"
+            (box 
+              :style "margin: -20px 0px;"
               (box 
+                :class "window cont trans"
                 :orientation "v"
-                :space-evenly false
-                (for app in {appsjson.apps}
-                  (app :a app)))))))
+                (scroll 
+                  :hscroll false
+                  :vscroll true
+                  :height 500
+                  (box 
+                    :orientation "v"
+                    :space-evenly false
+                    (for app in {appsjson.apps}
+                      (app :a app)))))))))
           
     (bottomleftstruct)))

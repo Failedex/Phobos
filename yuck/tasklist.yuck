@@ -67,7 +67,11 @@
               :class "window"
               :hexpand true))
 
-          (tasklistwid)))
+          (box
+            :class "window"
+            (box 
+              :style "margin: -20px 0px;"
+              (tasklistwid)))))
     (bottomrightstruct)))
 
 (defwidget tasklistwid []
@@ -75,14 +79,16 @@
      :orientation "h"
      :space-evenly false
      :vexpand true
-     :class "window cont"
+     :class "window cont trans"
      :height 628
      (subbox 
+       :vexpand true
        :class "sub"
+       :rmargin 20
        (box 
          :vexpand true 
          :width 400
-         :class "window sub cont"
+         :class "window sub cont trans"
          (scroll 
            :vscroll true 
            :hscroll false 
@@ -111,11 +117,13 @@
 
 (defwidget task [a] 
   (overlay
-    (button
+    (eventbox
+      :cursor "all-scroll"
       :onclick "swaymsg [pid=${a.pid}] focus "
       (subbox
+        :rmargin 10;
         (box 
-          :class "window cont"
+          :class "window cont trans"
           :orientation "v"
           :space-evenly false 
           (box
@@ -128,7 +136,8 @@
               :text "${a.name}")
             (box 
               :hexpand true)
-            (button 
+            (eventbox
+              :cursor "pointer"
               :onclick "swaymsg [pid=${a.pid}] kill"
               (image 
                 :image-width 25 
@@ -156,7 +165,8 @@
       
 
 (defwidget workspacebox [i focused]
-  (button
+  (eventbox
+    :cursor "pointer"
     :onclick "swaymsg -t command workspace number ${workspacejson.workspaces[i].name}"
     (overlay
       (subbox 
@@ -198,12 +208,13 @@
     :valign "start"
     (overlay
       (subbox 
+        :vexpand true
         (box 
           :hexpand true
           :vexpand true
           :class "window"))
       (label 
-        :halign "start"
+        :halign "center"
         :style "margin: 8px 30px; font-size: 25px;"
         :truncate true 
         :valign "start"

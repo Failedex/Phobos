@@ -43,9 +43,9 @@
         :space-evenly false 
         :spacing 20
         :class "window bar"
+        :tooltip "${EWW_BATTERY.BAT0.capacity}%"
         (overlay
           (image 
-            :tooltip "${EWW_BATTERY.BAT0.capacity}%"
             :image-width 35
             :path "./assets/icons/bat${ EWW_BATTERY.BAT0.status == 'Charging' ? 'c' : 0}.svg")
           (scale 
@@ -99,7 +99,8 @@
       (revealer 
         :reveal {playerctl.song != ""}
         :transition "slideleft"
-        (button 
+        (eventbox
+          :cursor "pointer"
           :width 400
           :onclick "./scripts/hackslide.sh mediaint &"
           (box 

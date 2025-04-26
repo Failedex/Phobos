@@ -1,4 +1,4 @@
-(defvar version "0.3.2")
+(defvar version "0.3.3")
 
 (defpoll volumemute :initial "false" :interval "2s" "pamixer --get-mute")
 (defpoll volume :initial "0" :interval "2s" "pamixer --get-volume")

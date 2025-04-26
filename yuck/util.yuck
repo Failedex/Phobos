@@ -13,9 +13,12 @@
         :hexpand true
         (label 
           :class "large"
-          :halign "start"
+          :halign "center"
           :valign "end"
-          :text title))) 
+          :text title))
+      (box 
+        :class "window"
+        :width 40)) 
          
     (children)
         
@@ -28,7 +31,7 @@
       (box 
         :class "triangle topleft large"))))
 
-(defwidget subbox [?class ?hexpand]
+(defwidget subbox [?class ?hexpand ?vexpand ?rmargin]
   (box 
     :style "margin: 8px;"
     :orientation "v"
@@ -43,7 +46,13 @@
         :class "window ${class}"
         :hexpand true))
          
-    (children)
+
+    (box 
+      :class "window ${class}"
+      :vexpand {vexpand == true}
+      (box 
+        :style "margin: -${rmargin ?: 0}px 0px;"
+        (children)))
         
     (box 
       :orientation "h"

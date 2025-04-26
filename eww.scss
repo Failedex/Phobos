@@ -32,6 +32,9 @@ tooltip {
   &.sub {
     background-color: $bg2;
   }
+  &.trans {
+    background-color: transparent
+  }
 }
 
 label {

@@ -69,7 +69,12 @@
               :class "window"
               :hexpand true))
 
-          (systemwid)))
+          (box
+            :class "window"
+            (box 
+              :style "margin: -20px 0px;"
+              (systemwid)))))
+
     (bottomrightstruct)))
           
 
@@ -79,7 +84,7 @@
     :space-evenly false 
     :width 404
     :vexpand true 
-    :class "window cont"
+    :class "window cont trans"
     (box 
       :orientation "h"
       :space-evenly false 
@@ -157,7 +162,8 @@
       :text name)
     (box 
       :hexpand true)
-    (button
+    (eventbox
+      :cursor "pointer"
       :onclick command
       (overlay
         (box

@@ -54,7 +54,8 @@
         (revealer
           :reveal {!revealtasklistint}
           :transition "slideleft"
-          (button
+          (eventbox
+            :cursor "pointer"
             :onclick "./scripts/hackslide.sh systemint &"
             (box 
               :orientation "h"
@@ -69,7 +70,8 @@
         (revealer
           :reveal {!revealsystemint}
           :transition "slideright"
-          (button
+          (eventbox
+            :cursor "pointer"
             :onclick "./scripts/hackslide.sh tasklistint &"
             (box 
               :orientation "h"
@@ -94,12 +96,14 @@
       (box 
         :orientation "h"
         :space-evenly false
-        (button
+        (box
           :style "margin-right: 10px;"
-          :onclick "./scripts/hackslide.sh launcherint &"
-          (image 
-            :image-width 35
-            :path "./assets/icons/search.svg"))
+          (eventbox
+            :cursor "pointer"
+            :onclick "./scripts/hackslide.sh launcherint &"
+            (image 
+              :image-width 35
+              :path "./assets/icons/search.svg")))
         (revealer 
           :reveal reveallauncherint
           :transition "slideleft"
@@ -111,7 +115,8 @@
           :reveal {!reveallauncherint}
           :halign "start"
           :transition "slideright"
-          (button
+          (eventbox
+            :cursor "pointer"
             :onclick "./scripts/hackslide.sh launcherint &"
             (label
               :class "large"
