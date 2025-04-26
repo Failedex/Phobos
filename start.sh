@@ -23,4 +23,4 @@ do
     swaymsg bindsym Mod4+$i exec "~/.config/eww/phobos/scripts/wsswitch.sh $i"
 done
 
-eww -c ./ open-many topbar bottombar notifypopup barslide 
+eww -c ./ open-many barslide topbar bottombar notifypopup 

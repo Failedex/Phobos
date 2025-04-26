@@ -8,7 +8,7 @@ if [[ ! -f $COUNTER ]]; then
     echo '0' > $COUNTER
 fi
 
-~/.config/sway/scripts/workspace focus $1 &
+swaymsg workspace number $1 &
 
 check_eww () {
     if [[ ! $(eww -c $PWD ping) ]]; then 
