@@ -20,7 +20,7 @@ If there are other things missing, I'm sure you can figure it out. Good luck.
 ## Installation
 
 > [!WARNING]
-> These dotfiles are untested and may not work on other devices. There are also some bugs that I can't be bothered fixing, so they are kinda there. 
+> These dotfiles are untested and may not work on other devices. 
 > It's safer to use this as a reference.
 
 1. Clone the repo under `~/.config/eww/phobos`
