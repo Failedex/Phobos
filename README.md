@@ -1,6 +1,10 @@
 # PHOBOS
 
-Was originally trying to make [this pixel art](https://x.com/Arvydas_B/status/1307207015303974912) a real thing, but then I got side tracked by many other things and ideas.
+Was originally trying to make [this pixel art](https://x.com/Arvydas_B/status/1307207015303974912) a real thing, but then I got side tracked by many other things and ideas. 
+
+https://github.com/user-attachments/assets/055910e9-8c4c-4d2f-90ad-36058576cb92
+
+This rice heavily utilizes triangles, which is not often seen in many other rices. Do check out how it was done, because it would be cool to see this idea in other rices.
 
 # Tools used
 - Compositor: sway/swayfx
